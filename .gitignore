@@ -1,0 +1,4 @@
+firmware/Debug
+firmware/Release
+firmware/__vm
+firmware/.vs
