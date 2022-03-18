@@ -108,7 +108,8 @@ function withBme(bytes, start, response) {
         hum: bytes[start + 1],
         pre: ((bytes[start + 2] << 16) | (bytes[start + 3] << 8) | (bytes[start + 4])),
     };
-
+    
+    calculateDewPoint(bytes[start] - 100, bytes[start + 1], response);
     return response;
 }
 
@@ -137,3 +138,19 @@ function toSoilMoisture(byte0, byte1) {
     var moisture = voltage / 3 * 50;
     return parseFloat(moisture.toFixed(2));
 }
+
+function calculateDewPoint(t, rh, response) {
+  var a = 17.27;
+  var b = 237.7;
+
+  var T = t; 
+  var RH = rh;
+
+  var Tdp = (b*((a*T)/(b+T) + Math.log(RH/100)))/(a-((a*T)/(b+T) + Math.log(RH/100)));
+
+  response['tdp'] = parseFloat(Tdp.toFixed(2));
+
+  return response;
+
+}
+
