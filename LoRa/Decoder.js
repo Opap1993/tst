@@ -146,6 +146,11 @@ function calculateDewPoint(t, rh, response) {
   var T = t; 
   var RH = rh;
 
+  if (RH === 0) {
+    response['tdp'] = -40;
+    return response;
+  }
+
   var Tdp = (b*((a*T)/(b+T) + Math.log(RH/100)))/(a-((a*T)/(b+T) + Math.log(RH/100)));
 
   response['tdp'] = parseFloat(Tdp.toFixed(2));
