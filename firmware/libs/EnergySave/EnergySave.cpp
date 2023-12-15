@@ -24,6 +24,10 @@ void EnergySaveClass::standByMode(){
 	#if DEBUG
 	debug->println("Stand By Mode");
 	#endif
+	pinMode(A1,OUTPUT);
+	digitalWrite(A1,HIGH);
+	delay(500);
+	digitalWrite(A1,LOW);
 	rtc.standbyMode();
 }
 
@@ -56,6 +60,10 @@ void EnergySaveClass::lowPowerPins(bool led_removed){
 	
 	if(!led_removed){
 		digitalWrite(13, LOW);
+		pinMode(A1,OUTPUT);
+		digitalWrite(A1,HIGH);
+		delay(500);
+		digitalWrite(A1,LOW);
 	}
 }
 
